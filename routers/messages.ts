@@ -4,6 +4,11 @@ import fileDb from "../fileDb";
 
 const messageRouter = express.Router();
 
+messageRouter.get('/', async (_, res ) => {
+    const messages = await fileDb.getLastMessages();
+    res.send(messages);
+});
+
 messageRouter.post('/', async (req, res) => {
     const newMessage: Message = {
         text: req.body.message,
